@@ -7,8 +7,17 @@ pipeline {
   }
   stages {
     stage('Compile') {
-      steps {
-        sh "mvn clean compile"
+      parallel {
+        stage('Compile') {
+          steps {
+            sh 'mvn clean compile'
+          }
+        }
+        stage('Archive') {
+          steps {
+            junit '*.tt'
+          }
+        }
       }
     }
   }
