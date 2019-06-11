@@ -11,6 +11,7 @@ pipeline {
         stage('Compile') {
           steps {
             sh 'mvn clean compile'
+            archiveArtifacts '*.zip'
           }
         }
         stage('Archive') {
